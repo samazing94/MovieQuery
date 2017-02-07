@@ -22,32 +22,22 @@ var newMovie = {title: "La La Land", year: "2017", length: "228", rating: "9.0",
 console.log(JSON.stringify(addMovie(newMovie)));
 
 function movieByRating(){
-  var arr =[];
-  for (var i = 0; i < movieList.length; i++) {
-    arr.push(parseFloat(movieList[i].rating));
-  }
-  arr.sort();
-  //console.log(arr.length);
-  for (var i = 0; i < arr.length; i++){
-
-  console.log(arr[i]);
-  }
-for (var i = 0; i < arr.length; i++)
-{
-  for (var j = 0; j < arr.length; j++)
-  {
-    if (arr[i] == parseFloat(movieList[j].rating))
-    {
-      console.log(movieList[i]);
-    }
-  }
-}
+  movieList.sort(function(a, b) { return a.rating - b.rating });
+  return JSON.stringify(movieList);
 }
 
 console.log(JSON.stringify(movieByRating()));
 
-function findByTitle( title ){
-  //add code
+function findByTitle( s_title ){
+	var found = [];
+     var f = 0;
+	for (var i = 0; i < movieList.length; i++){
+          if (movieList[i].title.search(s_title) != -1){
+               found[f] = movieList[i];
+               f++;
+  	 	}
+  	}
+  	return JSON.stringify(found);
 }
 
-console.log(findByTitle("matrix"));
+console.log(findByTitle("Matrix"));
